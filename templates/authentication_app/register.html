@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{%load static%}
+
+{% block content %}
+    <div class="row" align="center">
+        <div class="col-md-4"></div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+
+                    <div class="col-md-8 mt-2">
+                        <div class="card mt-6" style="width: 25rem;">
+                          <img src="{% static 'authentication.png' %}" >
+                          <div class="card-body">
+                            <h5 class="card-title text-muted">Sign into your account to connect with other people</h5>
+                              <a href="" class="btn btn-sm btn-block btn-primary">
+                                  <i class="fa-brands fa-square-facebook"></i> Login with Facebook</a>
+                              <div class="row">
+                                  <div class="col-md-5 mt-2">
+                                      <hr>
+                                  </div>
+                                  <div class="col-md-2 mt-2">
+                                      <p class="text-muted">OR</p>
+                                  </div>
+                                  <div class="col-md-5 mt-2">
+                                      <hr>
+                                  </div>
+                              </div>
+                              {% if messages %}
+                                {% for message in messages %}
+                                  <div class="alert alert-danger">
+                                      {{message}}
+                                  </div>
+                               {% endfor %}
+                              {% endif %}
+                              <form action="{% url 'register'%}" method="post">
+                                  {% csrf_token %}
+                                  <div class="form-group mt-3">
+
+                                        <input class="form-control form-control-sm" type="email" name="email" value="{{data.email}}" placeholder="Email">
+
+                                  </div>
+                                  <div class="form-group mt-3">
+
+                                        <input class="form-control form-control-sm" type="text" name="name" value="{{data.name}}" placeholder="FullName">
+
+                                  </div>
+                                  <div class="form-group mt-3">
+
+                                        <input class="form-control form-control-sm" type="text" name="username" value="{{data.username}}" placeholder="UserName">
+
+                                  </div>
+                                  <div class="form-group mt-3">
+
+                                        <input class="form-control form-control-sm" type="password" name="password" value="" placeholder="Password">
+
+                                  </div>
+                                  <div class="form-group mt-3">
+
+                                        <input class="form-control form-control-sm" type="password" name="password2" value="" placeholder="Confirm Password">
+
+                                  </div>
+                                  <input type="submit" value="Register" class="btn btn-sm btn-block btn-primary mt-3">
+                              </form>
+
+                              <small class="py-3"> By signing you agree to our Terms, Data Policy and Cookie Policy. </small>
+
+                          </div>
+                        </div>
+                        <div class="card" style="width: 25rem;">
+                            <div class="card-body">
+                                <p>Already have an account? <a href="" class="btn btn-primary"> Log in </a> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+{% endblock %}
