@@ -26,16 +26,12 @@
                                       <hr>
                                   </div>
                               </div>
-                              {% if messages %}
-                                {% for message in messages %}
-                                  <div class="alert alert-danger">
-                                      {{message}}
-                                  </div>
-                               {% endfor %}
-                              {% endif %}
+
+                              {% include 'partials/messages_partial.html'%}
+
                               <form action="{% url 'register'%}" method="post">
                                   {% csrf_token %}
-                                  <div class="form-group mt-3">
+                                  <div class="form-group mt-1">
 
                                         <input class="form-control form-control-sm" type="email" name="email" value="{{data.email}}" placeholder="Email">
 
@@ -67,9 +63,10 @@
 
                           </div>
                         </div>
+                        <br>
                         <div class="card" style="width: 25rem;">
                             <div class="card-body">
-                                <p>Already have an account? <a href="" class="btn btn-primary"> Log in </a> </p>
+                                <p>Already have an account? <a href="{% url 'login' %}" class="btn btn-primary"> Log in </a> </p>
                             </div>
                         </div>
                     </div>
