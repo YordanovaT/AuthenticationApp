@@ -139,3 +139,9 @@ EMAIL_PORT=587
 MESSAGE_TAGS={
     messages.ERROR: 'danger'
 }
+
+# Configuration for needed for the proper visualisation of the home page
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
