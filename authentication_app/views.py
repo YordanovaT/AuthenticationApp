@@ -13,6 +13,7 @@ from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeErr
 from django.core.mail import EmailMessage
 from django.conf import settings
 
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
@@ -109,6 +110,38 @@ class LoginView(View):
 
         return render(request, 'authentication_app/login.html')
 
+    def post(self, request):
+        """ Method used for user login """
+
+        context = {'has_error': False,
+                   'data': request.POST
+                   }
+
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        if username == '':
+            messages.add_message(request, messages.ERROR, 'Username is required for user login')
+            context['has_error'] = True
+
+        if password == '':
+            messages.add_message(request, messages.ERROR, 'Password is required for user login')
+            context['has_error'] = True
+
+        user = authenticate(request, username=username, password=password)
+
+        if not user and not context['has_error']:  # Checking if authentication method has failed
+            messages.add_message(request, messages.ERROR, 'Invalid login. Try to login again')
+            context['has_error'] = True
+        if context['has_error']:
+            return render(request, 'authentication_app/login.html', status=401, context=context)
+
+        # If there are no errors:
+        login(request, user)
+
+        return redirect('home')
+        #return render(request, 'authentication_app/login.html')
+
 
 class ActivateAccountView(View):
 
@@ -129,3 +162,17 @@ class ActivateAccountView(View):
 
             return redirect('login')
         return render(request, 'authentication_app/activation_failed.html', status=401)
+
+
+class HomeView(View):
+
+    def get(self, request):
+        """ Method used to GET the home page """
+        return render(request, 'home.html')
+
+
+class LogOutView(View):
+    def post(self, request):
+        logout(request)
+        messages.add_message(request, messages.SUCCESS, ' You successfully logged out.')
+        return redirect('login')

@@ -15,7 +15,7 @@
 
                               <h5 class="card-title text-muted">Sign into your account to connect with other people</h5>
 
-                              {% include 'partials/messages_partial.html'%}
+                              {% include 'partials/messages_partial.html' %}
 
                               <form action="{% url 'login' %}" method="post">
 
@@ -23,7 +23,7 @@
 
                                   <div class="form-group mt-3">
 
-                                      <input class="form-control form-control-sm" type="email" name="username"
+                                      <input class="form-control form-control-sm" type="text" name="username"
                                              value="{{data.username}}" placeholder="Username">
 
                                   </div>
@@ -34,10 +34,10 @@
                                              value="{{data.password}}" placeholder="Password">
 
                                   </div>
-
+                                     <input type="submit" value="Login" class="btn btn-sm btn-block btn-primary mt-3">
                               </form>
                               <div class="row">
-                                  <input type="submit" value="Login" class="btn btn-sm btn-block btn-primary mt-3">
+
 
                                   <div class="col-md-5 mt-2">
                                       <hr>
