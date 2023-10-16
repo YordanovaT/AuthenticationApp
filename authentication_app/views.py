@@ -68,7 +68,7 @@ class RegistrationView(View):
             context['has_error'] = True
 
         if context['has_error']:
-            return render(request, 'authentication_app/register.html', context)
+            return render(request, 'authentication_app/register.html', context, status=400)
 
         # If there are no errors, then we create the user
         user = User.objects.create_user(username=username, email=email)
@@ -140,7 +140,6 @@ class LoginView(View):
         login(request, user)
 
         return redirect('home')
-        #return render(request, 'authentication_app/login.html')
 
 
 class ActivateAccountView(View):
