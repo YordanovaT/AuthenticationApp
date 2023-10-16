@@ -1,9 +1,9 @@
 
 {% autoescape off%}
 
-      <h5 align="center">Hello {{user.username}}. Thank you for registering to our site.
-            In order to verify your account, please click on the link bellow.</h5>
+      Hello {{user.username}}. Thank you for registering to our site.
+      In order to verify your account, please click on the link bellow.
 
-      <p align="center"> http://{{ domain }}{% url 'activate' uidb64=uid token=token %}</p>
+       http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
 
 {% endautoescape %}
