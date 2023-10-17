@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{%load static%}
+
+{% block content %}
+    <div class="row" align="center">
+        <div class="col-md-4"></div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+
+                    <div class="col-md-8 mt-2">
+                        <div class="card mt-6" style="width: 25rem;">
+                          <img src="{% static 'authentication.png' %}" >
+                          <div class="card-body">
+                            <h5 class="card-title text-muted">Please, provide your email in order to receive instructions</h5>
+
+
+                              {% include 'partials/messages_partial.html'%}
+
+                              <form action="{% url 'reset-password' %}" method="post">
+                                  {% csrf_token %}
+                                  <div class="form-group mt-1">
+
+                                        <input class="form-control form-control-sm" type="email" name="email" value="{{data.email}}" placeholder="Email">
+
+                                  </div>
+
+                                  <input type="submit" value="Send email with instruction" class="btn btn-sm btn-block btn-primary mt-3">
+
+                              </form>
+
+                          </div>
+                        </div>
+                        <br>
+                        <div class="card" style="width: 25rem;">
+                            <div class="card-body">
+                                <p>Already have an account? <a href="{% url 'login' %}" class="btn btn-primary"> Log in </a> </p>
+                                <p>Do not have an account? Click here to create one.
+                                    <a href="{% url 'register' %}" class="btn btn-primary"> Register </a> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+{% endblock %}

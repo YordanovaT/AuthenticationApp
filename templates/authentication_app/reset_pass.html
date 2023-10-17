@@ -1,0 +1,7 @@
+{% autoescape off%}
+
+      Hello {{user.username}}. In order to reset your password, please click on the link bellow.
+
+       http://{{ domain }}{% url 'set-new-pass' uidb64=uid token=token %}
+
+{% endautoescape %}
